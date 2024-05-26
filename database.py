@@ -21,10 +21,10 @@ def to_room_dict(address: str, city: str, contract_date: str, room_type: str, re
     
     return room
 
-def upload_rooms(rooms: list):
+def upload_rooms(rooms: list, table_name: str):
     
     try:
-        data, _ = supabase.table('rented_rooms').upsert(rooms).execute()
+        data, _ = supabase.table(table_name).upsert(rooms).execute()
         
     except PostgrestAPIError as e:
         print("POSTGRES API ERROR")
@@ -40,10 +40,10 @@ def upload_rooms(rooms: list):
         
     return True, data
 
-def fetch_all_data():
+def fetch_all_data(table_name: str):
     
     try:
-        data, _ = supabase.table('rented_rooms').select('*').execute()
+        data, _ = supabase.table(table_name).select('*').execute()
         
     except PostgrestAPIError as e:
         print("POSTGRES API ERROR")

@@ -20,10 +20,21 @@ def backup_data(data):
 
 if __name__ == "__main__":
 
-    success, data = fetch_all_data()
+    success, data_rented = fetch_all_data("rented_rooms")
     
     if not success:
-        print("Failed to fetch data")
+        print("Failed to fetch data from rented_rooms")
         quit()
         
+    success, data_current = fetch_all_data("current_rooms")
+    
+    if not success:
+        print("Failed to fetch data from current_rooms")
+        quit()
+        
+    data = {
+        "rented_rooms": data_rented,
+        "current_rooms": data_current
+    }
+    
     backup_data(data)
