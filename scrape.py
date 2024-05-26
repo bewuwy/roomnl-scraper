@@ -116,8 +116,9 @@ def get_all_current_rooms():
         city = room['gemeenteGeoLocatieNaam']
         
         rent = room['totalRent']
-        
         surface_area = room['areaDwelling']
+        floor_number = room['floor']['verdieping']
+        residents_number = room['aantalMedebewoners']
         
         contract_date = room['availableFromDate']
         if not contract_date:
@@ -130,6 +131,8 @@ def get_all_current_rooms():
             'Contract date': contract_date,
             'Rent': int(round(rent)),
             'Area': surface_area,
+            "Floor": floor_number,
+            "Residents": residents_number
         })
         
     return rooms
